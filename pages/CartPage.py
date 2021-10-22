@@ -1,4 +1,5 @@
 from pages.BasePage import BasePage
+from pages.locators import CartPageLocators
 
 
 class CartPage(BasePage):
@@ -11,4 +12,6 @@ class CartPage(BasePage):
 
     def is_cart_empty(self):
         """Verifies that the cart is empty"""
-        assert "Your cart is currently empty." in self.driver.page_source
+
+        cart_empty_text = self.driver.find_element(*CartPageLocators.CART_EMPTY_PARAGRAPH).text
+        assert "Your cart is currently empty." == cart_empty_text

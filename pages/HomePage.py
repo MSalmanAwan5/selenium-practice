@@ -1,5 +1,6 @@
 from pages.BasePage import BasePage
 from pages.locators import HomePageLocators
+from selenium.webdriver.common.keys import Keys
 
 
 class HomePage(BasePage):
@@ -19,3 +20,14 @@ class HomePage(BasePage):
         """checks if the site logo is present"""
 
         return self.driver.find_element(*HomePageLocators.SITE_LOGO).is_displayed()
+
+    def test_search_form(self, search_query):
+        """checks if the search form works"""
+
+        search_icon_element = self.driver.find_element(*HomePageLocators.SEARCH_ICON)
+        self.driver.implicitly_wait(5)
+        search_icon_element.click()
+        self.driver.implicitly_wait(5)
+        search_input_element = self.driver.find_element(*HomePageLocators.SEARCH_INPUT)
+        search_input_element.send_keys(search_query)
+        search_input_element.send_keys(Keys.RETURN)
